@@ -12,8 +12,9 @@ export default function Item(props) {
       </div>
       <div className="flex justify-between  bg-green-500 rounded-b-lg">
         <div className="pl-2 pt-2 pb-2 text-white font-semibold">Rs 120/=</div>
-        <div className="flex p-2 w-1/2 sm:w-2/3  2xl:w-1/2 bg-stone-100 hover:bg-stone-300 rounded-br-lg hover:cursor-pointer font-semibold">
-          Add to cart &nbsp;
+        <div className="  flex justify-center p-2 w-1/2    bg-stone-200 hover:bg-lime-400 hover:text-white rounded-br-lg hover:cursor-pointer font-semibold">
+          Buy
+          {/* Add to &nbsp;
           <button className="flex   ">
             {" "}
             <svg
@@ -30,7 +31,8 @@ export default function Item(props) {
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
-          </button>
+          </button> */}
+
         </div>
       </div>
     </div>

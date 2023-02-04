@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
-import person from "../images/person.png";
-import plus from "../images/pluscircle.png";
-import radio from "../images/radio.png";
-import shoppingcart from "../images/shoppingcart.png";
-import newShopping  from  "../images/new.jpeg";
+import person from "../../images/person.png";
+import plus from '../../images/pluscircle.png';
+import radio from "../../images/radio.png";
+import shoppingcart from "../../images/shoppingcart.png";
+import newShopping  from  "../../images/new.jpeg";
 
 export default function Home() {
 
@@ -80,7 +80,7 @@ export default function Home() {
 
           </a>
 
-          <a className="mb-4 lg:mb-0 h-36 lg:h-auto lg:w-1/2  card-bg flex flex-col text-white items-center lg:pt-8 bg-pink-400 hover:text-orange-100">
+          <a className="mb-4 lg:mb-0 h-36 lg:h-auto lg:w-1/2  card-bg flex flex-col text-white items-center lg:pt-8 bg-pink-400 hover:text-orange-100" href="/store">
 
           <img src={radio} className="mt-4 lg:mt-0 w-8  mb-4" />
             <div className="text-lg font-semibold mb-2 ">Track your Order</div>

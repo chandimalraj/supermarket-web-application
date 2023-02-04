@@ -1,25 +1,28 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import buscuit from "../images/buscuit.png";
-import b2 from "../images/b2.jpeg";
-import b3 from "../images/b3.jpeg";
-import b4 from "../images/b4.jpeg";
-import search from "../images/Vector.png";
-import login from "../images/login.png";
-import menu from "../images/menu.svg";
+import { useNavigate, useParams } from "react-router-dom";
+import buscuit from "../../images/buscuit.png";
+import b2 from "../../images/b2.jpeg";
+import b3 from "../../images/b3.jpeg";
+import b4 from "../../images/b4.jpeg";
+import search from "../../images/Vector.png";
+import login from "../../images/login.png";
+import menu from "../../images/menu.svg";
 import Banner from "./BannerCarousel";
 import Item from "./Item";
-import c1 from "../images/ShopByCategory1.jpg";
-import c2 from "../images/ShopByCategory2.jpg";
-import c3 from "../images/ShopByCategory3.jpg";
-import c4 from "../images/ShopByCategory4.jpg";
-import c5 from "../images/ShopByCategory5.jpg";
-import c6 from "../images/ShopByCategory6.jpg";
+import c1 from "../../images/ShopByCategory1.jpg";
+import c2 from "../../images/ShopByCategory2.jpg";
+import c3 from "../../images/ShopByCategory3.jpg";
+import c4 from "../../images/ShopByCategory4.jpg";
+import c5 from "../../images/ShopByCategory5.jpg";
+import c6 from "../../images/ShopByCategory6.jpg";
 
 export default function () {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+
+  const {id} = useParams()
+  console.log(id)
 
   return (
     <div className="">
@@ -49,12 +52,12 @@ export default function () {
           </ul>
 
           <button
-            className="hidden md:flex px-4 bg-green-500 hover:cursor-pointer text-base font-medium text-white reg-input mr-3 flex items-center"
+            className="hidden md:flex  px-6 p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-3xl "
             onClick={() => {
               navigate("/login");
             }}
           >
-            Login <img src={login} className="pl-2" />
+            Login 
           </button>
           <div
             className=" text-3xl absolute right-6 md:hidden"

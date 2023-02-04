@@ -1,8 +1,13 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import RegisterPopup from "../Register/RegisterPopup";
+import Spinner from "../Register/Spinner";
+
 
 export default function Login() {
   const navigate = useNavigate();
+  
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -10,15 +15,54 @@ export default function Login() {
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
 
-  const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const [spinner, setSpinner] = useState(false);
+  const [popup, setPopup] = useState(false);
+
+  const [header, setHeader] = useState("");
+  const [message, setMessage] = useState("");
+  const [advice, setadvice] = useState("");
+
+  const emailPattern =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const phonePattern = /^\d{10}$/;
 
-  const login = () => {
-   //id.length!=0 && 
-   console.log("login")
-    if (id.length!=0  &&  !(RegExp(emailPattern).test(id) || RegExp(phonePattern).test(id))) {
-      setError1("Id is not valid! please check entered Id");
+  const closePopup = () => {
+    setPopup(false);
+    navigate("/store?login=true");
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+    const idAndPassword = { id: id, password: password };
+    //id.length!=0 &&
+    console.log("login");
+    if (
+      id.length != 0 &&
+      !(RegExp(emailPattern).test(id) || RegExp(phonePattern).test(id))
+    ) {
+      setError1("Email or Phone is not valid! please check again");
     } else {
+      setSpinner(true)
+      
+      axios
+        .post("http://localhost:8050/api/v1/customer/login", idAndPassword)
+        .then((res) => {
+          setTimeout(()=>{setSpinner(false)},4000)
+          //console.log(res);
+          if (res.data == "password incorrect") {
+            setHeader("Oops!");
+            setMessage("password is incorrect");
+            setadvice("please check again");
+          } else {
+            setHeader("Done");
+            setMessage("Successfully Login");
+            setadvice("thank you");
+          }
+          setPopup(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -56,12 +100,12 @@ export default function Login() {
               StarX Shopping
             </div>
 
-            <form onSubmit={(e)=>{
-                e.preventDefault()
-                login()
-                console.log("submitted")
-                
-            }}>
+            <form
+              onSubmit={(e) => {
+                login(e);
+                console.log("submitted");
+              }}
+            >
               <div>Email Or Phone</div>
 
               <input
@@ -117,13 +161,20 @@ export default function Login() {
                 // }}
                 type="submit"
                 value="Next"
-              >
-                
-              </input>
+              ></input>
             </form>
           </div>
         </div>
       </div>
+      {spinner == true && <Spinner />}
+      {popup == true && (
+        <RegisterPopup
+          close={closePopup}
+          header={header}
+          message={message}
+          advice={advice}
+        />
+      )}
     </div>
   );
 }
