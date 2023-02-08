@@ -15,17 +15,51 @@ import c3 from "../../images/ShopByCategory3.jpg";
 import c4 from "../../images/ShopByCategory4.jpg";
 import c5 from "../../images/ShopByCategory5.jpg";
 import c6 from "../../images/ShopByCategory6.jpg";
+import ItemPopup from "./ItemPopup";
+import cart from "../../icons/Buy.png"
+import CartDrop from "./CartDrop";
 
 export default function () {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  const [openItem, setOpenItem] = useState(false);
+  const [itemId, setId] = useState(0);
+  const [cartdrop , setCart] = useState(false)
 
-  const {id} = useParams()
-  console.log(id)
+  const [item, setItem] = useState({
+    id: "",
+    name: "",
+    price: "",
+  });
+
+  const items = [
+    {
+      id: 1,
+      name: "munchee",
+      price: "120",
+    },
+    {
+      id: 2,
+      name: "munchee",
+      price: "120",
+    },
+  ];
+
+  const itemFind = ()=>{
+          setItem({
+            id:itemId,
+            name:"ona maggulak"
+          })
+  }
+
+  const { id } = useParams();
+  console.log(id);
 
   return (
-    <div className="">
+    <div className="relative">
+      {openItem == true && <ItemPopup id ={item.id} />}
+      {cartdrop == true && <CartDrop/>}
       <div className="bg-slate-800 sticky top-0 z">
         <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 ">
           <div className="font-display text-lg font-semibold text-slate-100">
@@ -50,15 +84,18 @@ export default function () {
               Promotions
             </li>
           </ul>
-
+           
+          <div className="flex space-x-6"><img src={cart} className="w-9" onClick={()=>setCart(!cartdrop)}/>
           <button
             className="hidden md:flex  px-6 p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-3xl "
             onClick={() => {
               navigate("/login");
             }}
           >
-            Login 
+            Login
           </button>
+
+          </div> 
           <div
             className=" text-3xl absolute right-6 md:hidden"
             onClick={() => {
@@ -74,7 +111,7 @@ export default function () {
         </div>
       </div>
 
-      <div className="hidden sm:flex container mx-auto flex justify-center -mt-4 h-12 -mb-8 sticky top-12 z">
+      <div className="hidden sm:flex container mx-auto flex justify-center -mt-4 h-12 -mb-8 sticky top-16 z">
         <input className="w-1/2 bg-slate-200 outline-0 px-5 font-roboto rounded-l-3xl shadow-lg" />
         <button className=" bg-green-500 pl-4 pr-6  text-base font-medium text-white rounded-r-3xl hover:bg-green-600 flex  items-center shadow-lg">
           SEARCH <img src={search} className="pl-2 " />
@@ -93,7 +130,7 @@ export default function () {
 
           <div className="flex flex-col sm:flex-row justify-center sm:space-x-3 space-y-2 sm:space-y-0 ">
             <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b4} />
+              <Item img={b4} open={setOpenItem} id={1} setId={setId} c={setCart}/>
             </div>
 
             <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
@@ -131,7 +168,7 @@ export default function () {
 
           <div className="flex justify-center space-x-3 ">
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b4} />
+              <Item img={b4} c={setCart}/>
             </div>
 
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
@@ -180,22 +217,30 @@ export default function () {
         <div className="container mx-auto  pb-8 ">
           <div className="flex   px-8 space-x-2 ">
             <div className="w-1/3 bg-orange-100 ">
-              <img src={c1}/>
+              <img src={c1} />
             </div>
             <div className="w-2/3 flex space-x-2">
               <div className="w-1/3 ">
-              <img src={c2} className=" "/>
+                <img src={c2} className=" " />
               </div>
 
               <div className="w-2/3 flex flex-col  space-y-2">
                 <div className="flex space-x-2">
-                  <div className="w-1/2 bg-lime-400"><img src={c3}/></div>
-                  <div className="w-1/2 bg-orange-300"><img src={c4}/></div>
+                  <div className="w-1/2 bg-lime-400">
+                    <img src={c3} />
+                  </div>
+                  <div className="w-1/2 bg-orange-300">
+                    <img src={c4} />
+                  </div>
                 </div>
 
                 <div className="flex space-x-2">
-                  <div className="w-1/2 bg-green-500"><img src={c5}/></div>
-                  <div className="w-1/2 bg-orange-200"><img src={c6}/></div>
+                  <div className="w-1/2 bg-green-500">
+                    <img src={c5} />
+                  </div>
+                  <div className="w-1/2 bg-orange-200">
+                    <img src={c6} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -204,61 +249,38 @@ export default function () {
       </div>
 
       <div className="bg-slate-800 pt-4 ">
-
         <div className="container mx-auto grid grid-cols-4 gap-4  pb-8 ">
-
           <div className="flex flex-col  text-white lg:pl-12">
-               <div className=" pb-4">
-               Quick Links
-               </div>
+            <div className=" pb-4">Quick Links</div>
 
-               <div className="py-2">
-                Home
-               </div>
-               <div className="py-2">
-               Catalogue & Deals
-               </div>
-               <div className="py-2">
-               Utility bill payments
-               </div>
-               <div className="py-2">
-               Track My Order
-               </div>
+            <div className="py-2">Home</div>
+            <div className="py-2">Catalogue & Deals</div>
+            <div className="py-2">Utility bill payments</div>
+            <div className="py-2">Track My Order</div>
           </div>
 
           <div className="flex flex-col  text-white">
-               <div className=" pb-4">
-               Quick Links
-               </div>
+            <div className=" pb-4">Quick Links</div>
 
-               <div className="py-2">
-                Home
-               </div>
-               <div className="py-2">
-               Catalogue & Deals
-               </div>
-               <div className="py-2">
-               Utility bill payments
-               </div>
-               <div className="py-2">
-               Track My Order
-               </div>
+            <div className="py-2">Home</div>
+            <div className="py-2">Catalogue & Deals</div>
+            <div className="py-2">Utility bill payments</div>
+            <div className="py-2">Track My Order</div>
           </div>
 
           <div className="col-span-2 lg:pr-10">
-
-              <div className="text-white pb-2">Enter Your Email To Subscribe</div>
-              <div className="w-full flex pb-3">
-              <input className="w-full outline-0 pl-2 "/><button className="bg-green-400 p-1.5 text-white font-roboto hover:bg-green-600 ">Subscribe</button>
-              </div>
-              <div className="text-white pb-3 ">Contact-Us</div>
-              <div className="text-white pb-3">About-Us</div>
-              <div className="text-white pb-3">Privacy Policy</div>
-
+            <div className="text-white pb-2">Enter Your Email To Subscribe</div>
+            <div className="w-full flex pb-3">
+              <input className="w-full outline-0 pl-2 " />
+              <button className="bg-green-400 p-1.5 text-white font-roboto hover:bg-green-600 ">
+                Subscribe
+              </button>
+            </div>
+            <div className="text-white pb-3 ">Contact-Us</div>
+            <div className="text-white pb-3">About-Us</div>
+            <div className="text-white pb-3">Privacy Policy</div>
           </div>
-
         </div>
-
       </div>
     </div>
   );

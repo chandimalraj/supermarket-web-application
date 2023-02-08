@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import RegisterPopup from "../Register/RegisterPopup";
@@ -36,6 +37,11 @@ export default function Login() {
     const idAndPassword = { id: id, password: password };
     //id.length!=0 &&
     console.log("login");
+    
+    //create cookie
+    //Cookies.set("my-cookie frontend","mage value eka")
+
+
     if (
       id.length != 0 &&
       !(RegExp(emailPattern).test(id) || RegExp(phonePattern).test(id))
@@ -45,15 +51,19 @@ export default function Login() {
       setSpinner(true)
       
       axios
-        .post("http://localhost:8050/api/v1/customer/login", idAndPassword)
+        .post("http://localhost:8050/api/v1/customer/login", idAndPassword, {
+          "withCredentials" : true
+          })
         .then((res) => {
           setTimeout(()=>{setSpinner(false)},4000)
-          //console.log(res);
+          console.log(res.headers);
+          
           if (res.data == "password incorrect") {
             setHeader("Oops!");
             setMessage("password is incorrect");
             setadvice("please check again");
           } else {
+            
             setHeader("Done");
             setMessage("Successfully Login");
             setadvice("thank you");
