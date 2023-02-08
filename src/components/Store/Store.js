@@ -18,6 +18,7 @@ import c6 from "../../images/ShopByCategory6.jpg";
 import ItemPopup from "./ItemPopup";
 import cart from "../../icons/Buy.png"
 import CartDrop from "./CartDrop";
+import CatogeryDrop from "./CatogeryDrop";
 
 export default function () {
   const navigate = useNavigate();
@@ -26,6 +27,14 @@ export default function () {
   const [openItem, setOpenItem] = useState(false);
   const [itemId, setId] = useState(0);
   const [cartdrop , setCart] = useState(false)
+  const [catdrop , setCat] = useState(false)
+  const [cartList,setItemToCart] = useState([])
+
+  const itemAddFunction = ()=>{
+    setItemToCart([...cartList,{id:"1",name:"munchee",price:"120"}])
+  }
+
+console.log(cartList)
 
   const [item, setItem] = useState({
     id: "",
@@ -57,12 +66,13 @@ export default function () {
   console.log(id);
 
   return (
-    <div className="relative">
+    <div className="">
       {openItem == true && <ItemPopup id ={item.id} />}
-      {cartdrop == true && <CartDrop/>}
-      <div className="bg-slate-800 sticky top-0 z">
-        <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 ">
-          <div className="font-display text-lg font-semibold text-slate-100">
+     
+      <div className="bg-slate-800 sticky top-0 z ">
+        <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 relative">
+        {cartdrop == true && <CartDrop cart={cartList} items={items}/>}
+          <div className="font-display text-lg font-semibold text-slate-100 pr-10">
             StarX Shopping
           </div>
 
@@ -112,7 +122,12 @@ export default function () {
       </div>
 
       <div className="hidden sm:flex container mx-auto flex justify-center -mt-4 h-12 -mb-8 sticky top-16 z">
-        <input className="w-1/2 bg-slate-200 outline-0 px-5 font-roboto rounded-l-3xl shadow-lg" />
+      <button className=" bg-green-500    text-base font-medium text-white rounded-l-3xl hover:bg-green-600 flex  items-center shadow-lg relative " >
+         <span onClick={()=>{
+        setCat(!catdrop)}} className='pr-6 pl-5 p-4'>Catogeries -></span> 
+         {catdrop==true && (<CatogeryDrop/>)} 
+        </button>
+        <input className="w-2/5 bg-slate-200 outline-0 px-5 font-roboto  shadow-lg" />
         <button className=" bg-green-500 pl-4 pr-6  text-base font-medium text-white rounded-r-3xl hover:bg-green-600 flex  items-center shadow-lg">
           SEARCH <img src={search} className="pl-2 " />
         </button>
@@ -130,7 +145,7 @@ export default function () {
 
           <div className="flex flex-col sm:flex-row justify-center sm:space-x-3 space-y-2 sm:space-y-0 ">
             <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b4} open={setOpenItem} id={1} setId={setId} c={setCart}/>
+              <Item img={b4} open={setOpenItem} id={1} setId={setId} c={setCart} addCart={itemAddFunction}/>
             </div>
 
             <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">

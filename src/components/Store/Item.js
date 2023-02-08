@@ -10,6 +10,8 @@ export default function Item(props) {
   const [x,y] =useState(false)
  const c = props.c
 
+ const addcart = props.addCart;
+
   return (
     <div className="flex flex-col  bg-white align-items shadow-lg rounded-lg box hover:shadow-2xl">
       <div className="text-orange-700  font-roboto font-medium pt-2 pl-2">
@@ -24,8 +26,9 @@ export default function Item(props) {
         <div onClick={()=>{
           // props.setId(itemId)
           // props.open(true)
-          y(true)
-          c(false)
+          //y(true)
+          //c(false)
+          addcart()
         }}className="  flex justify-center p-2 w-1/2    bg-stone-200 hover:bg-lime-400 hover:text-white rounded-br-lg hover:cursor-pointer font-semibold">
           Buy
           {/* Add to &nbsp;

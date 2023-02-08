@@ -1,95 +1,58 @@
 import React from 'react'
+import CartItem from './CartItem'
 
-export default function CartDrop() {
+export default function CartDrop(props) {
+   
+   const cart = props.cart
+   //const items = props.items
+   const items = [
+      {
+        id: 1,
+        name: "munchee",
+        price: "120",
+      },
+      {
+        id: 2,
+        name: "munchee",
+        price: "120",
+      },
+    ];
+  
+   console.log(items)
+
+   const data = [
+      { id: 1, name: "John Doe" },
+      { id: 2, name: "Victor Wayne" },
+      { id: 3, name: "Jane Doe" },
+    ];
+  
+
   return (
-    <div className='w-96  bg-slate-100 bg-right-top fixed top-20 right-0 z-10 pt-10 flex flex-col p-4 space-y-2 rounded-bl-xl'
+    <div className='w-96  bg-slate-100 bg-right-top absolute top-20 right-0  pt-10 flex flex-col p-4 space-y-2 rounded-bl-xl'
     >
 
-      <div className='bg-white w-90 h-10 flex items-center rounded'>
+     {
 
-        <div className='w-3/6 pl-2  font-bold'>
-           munchee snack
-        </div>
-        <div className='w-1/6 text-center text-green-400 font-bold'>
-           120.00
-        </div>
-        <div className='w-2/6 pl-6'>
-           Qty
-           <input className='border w-10 bg-slate-100 ml-2'/>
-           
-        </div>
+      // items.map((i)=>{
+      //    <CartItem/>
+      // })
 
+      // items.map(element => {
+        
+      //   <CartItem/>
+      // })
 
-      </div>
+     }
+
+           {cart.map((user) => (
+        <CartItem/>
+      ))}
       
-      <div className='bg-white w-90 h-10 flex items-center rounded'>
+      
+     
 
-        <div className='w-3/6 pl-2  font-bold'>
-           munchee snack
-        </div>
-        <div className='w-1/6 text-center text-green-400 font-bold'>
-           120.00
-        </div>
-        <div className='w-2/6 pl-6'>
-           Qty
-           <input className='border w-10 bg-slate-100 ml-2'/>
-           
-        </div>
-
-
-      </div>
-
-      <div className='bg-white w-90 h-10 flex items-center rounded'>
-
-        <div className='w-3/6 pl-2  font-bold'>
-           munchee snack
-        </div>
-        <div className='w-1/6 text-center text-green-400 font-bold'>
-           120.00
-        </div>
-        <div className='w-2/6 pl-6'>
-           Qty
-           <input className='border w-10 bg-slate-100 ml-2'/>
-           
-        </div>
-
-
-      </div>
-
-      <div className='bg-white w-90 h-10 flex items-center rounded'>
-
-        <div className='w-3/6 pl-2  font-bold'>
-           munchee snack
-        </div>
-        <div className='w-1/6 text-center text-green-400 font-bold'>
-           120.00
-        </div>
-        <div className='w-2/6 pl-6'>
-           Qty
-           <input className='border w-10 bg-slate-100 ml-2'/>
-           
-        </div>
-
-
-      </div>
-
-      <div className='bg-white w-90 h-10 flex items-center rounded'>
-
-        <div className='w-3/6 pl-2  font-bold'>
-           munchee snack
-        </div>
-        <div className='w-1/6 text-center text-green-400 font-bold'>
-           120.00
-        </div>
-        <div className='w-2/6 pl-6'>
-           Qty
-           <input className='border w-10 bg-slate-100 ml-2'/>
-           
-        </div>
-
-
-      </div>
-
+      
+      
       <div className='flex justify-center'>
         <button className='px-4 bg-green-500 p-2 rounded-lg text-white hover:bg-green-600'>save cart</button>
       </div>
