@@ -20,9 +20,12 @@ import cart from "../../icons/Buy.png";
 import CartDrop from "./CartDrop";
 import CatogeryDrop from "./CatogeryDrop";
 import axios from "axios";
+import Spinner from "../Register/Spinner";
 
 export default function () {
-
+  
+  const [render, setRender] = useState(false)
+  const [data,setData] = useState([])
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openItem, setOpenItem] = useState(false);
@@ -37,7 +40,9 @@ export default function () {
     try {
       const res = await axios.get('http://localhost:8050/api/v1/item/get-all')
       //const data =  await res.json()
-      console.log(res.data[0])                
+      console.log(res.data[0])  
+      setData(res.data) 
+      setRender(true)           
       
     } catch (error) {
       console.log(error)
@@ -52,13 +57,19 @@ export default function () {
 
   },[])
 
+  if(render){
+    console.log(data[0].item_name)
+  }
 
-  
+ // console.log(data[0].item_id)
+
+
+
   const itemAddFunction = () => {
     setItemToCart([...cartList, { id: "1", name: "munchee", price: "120" }]);
   };
 
-  //console.log(cartList);
+ // console.log(data);
 
   const [item, setItem] = useState({
     id: "",
@@ -88,10 +99,13 @@ export default function () {
 
   const { id } = useParams();
   //console.log(id);
-
-  return (
+  if(!render){
+    return <Spinner/>
+  }
+ 
+  return  (
     <div className="">
-      {openItem == true && <ItemPopup id={item.id} />}
+      {/* {openItem == true && <ItemPopup id={item.id} />} */}
 
       <div className="bg-slate-800 sticky top-0 z ">
         <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 relative">
@@ -195,7 +209,12 @@ export default function () {
           <div className="flex justify-center space-x-3">
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
               <Item
-                img={'https://i.ibb.co/Xp5PLgz/b4.jpg'}
+                name = {data[0].item_name}
+                img={data[0].item_image}
+                price = {data[0].selling_price}
+                size = {data[0].item_size}
+                unit = {data[0].measuring_unit}
+                company = {data[0].company}
                 open={setOpenItem}
                 id={1}
                 setId={setId}
@@ -205,48 +224,151 @@ export default function () {
             </div>
 
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
+              <Item 
+              name = {data[1].item_name}
+              img={data[1].item_image}
+              price = {data[1].selling_price}
+              size = {data[1].item_size}
+              unit = {data[1].measuring_unit}
+              company = {data[1].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
             </div>
 
             <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b2} />
+              <Item 
+              name = {data[2].item_name}
+              img={data[2].item_image}
+              price = {data[2].selling_price}
+              size = {data[2].item_size}
+              unit = {data[2].measuring_unit}
+              company = {data[2].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              
+              />
             </div>
 
             <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
+              <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
             </div>
 
             <div className="hidden xl:block  xl:w-1/5">
-              <Item img={b4} />
+              <Item
+                name = {data[2].item_name}
+                img={data[2].item_image}
+                price = {data[2].selling_price}
+                size = {data[2].item_size}
+                unit = {data[2].measuring_unit}
+                company = {data[2].company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+               />
             </div>
           </div>
 
           <div className="flex justify-center space-x-3 pt-3">
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item
-                img={b4}
+            <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+
+            <Item
+                name = {data[2].item_name}
+                img={data[2].item_image}
+                price = {data[2].selling_price}
+                size = {data[2].item_size}
+                unit = {data[2].measuring_unit}
+                company = {data[2].company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+               />
+            </div>
+
+            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
+            <Item 
+              name = {data[1].item_name}
+              img={data[1].item_image}
+              price = {data[1].selling_price}
+              size = {data[1].item_size}
+              unit = {data[1].measuring_unit}
+              company = {data[1].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="hidden xl:block  xl:w-1/5">
+            <Item
+                name = {data[0].item_name}
+                img={data[0].item_image}
+                price = {data[0].selling_price}
+                size = {data[0].item_size}
+                unit = {data[0].measuring_unit}
+                company = {data[0].company}
                 open={setOpenItem}
                 id={1}
                 setId={setId}
                 c={setCart}
                 addCart={itemAddFunction}
               />
-            </div>
-
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
-            </div>
-
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b2} />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-              <Item img={b4} />
             </div>
           </div>
         </div>
@@ -266,32 +388,15 @@ export default function () {
             </div>
           </div>
 
-          <div className="flex justify-center space-x-3 ">
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b4} c={setCart} />
-            </div>
-
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
-            </div>
-
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b2} />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-              <Item img={b4} />
-            </div>
-          </div>
-
-          <div className="flex justify-center space-x-3 pt-3">
+          <div className="flex justify-center space-x-3">
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
               <Item
-                img={b4}
+                name = {data[0].item_name}
+                img={data[0].item_image}
+                price = {data[0].selling_price}
+                size = {data[0].item_size}
+                unit = {data[0].measuring_unit}
+                company = {data[0].company}
                 open={setOpenItem}
                 id={1}
                 setId={setId}
@@ -301,19 +406,151 @@ export default function () {
             </div>
 
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
+              <Item 
+              name = {data[1].item_name}
+              img={data[1].item_image}
+              price = {data[1].selling_price}
+              size = {data[1].item_size}
+              unit = {data[1].measuring_unit}
+              company = {data[1].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
             </div>
 
             <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b2} />
+              <Item 
+              name = {data[2].item_name}
+              img={data[2].item_image}
+              price = {data[2].selling_price}
+              size = {data[2].item_size}
+              unit = {data[2].measuring_unit}
+              company = {data[2].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              
+              />
             </div>
 
             <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item img={b3} />
+              <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
             </div>
 
             <div className="hidden xl:block  xl:w-1/5">
-              <Item img={b4} />
+              <Item
+                name = {data[2].item_name}
+                img={data[2].item_image}
+                price = {data[2].selling_price}
+                size = {data[2].item_size}
+                unit = {data[2].measuring_unit}
+                company = {data[2].company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+               />
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-3 pt-3">
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+            <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+
+            <Item
+                name = {data[2].item_name}
+                img={data[2].item_image}
+                price = {data[2].selling_price}
+                size = {data[2].item_size}
+                unit = {data[2].measuring_unit}
+                company = {data[2].company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+               />
+            </div>
+
+            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item 
+              name = {data[3].item_name}
+              img={data[3].item_image}
+              price = {data[3].selling_price}
+              size = {data[3].item_size}
+              unit = {data[3].measuring_unit}
+              company = {data[3].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
+            <Item 
+              name = {data[1].item_name}
+              img={data[1].item_image}
+              price = {data[1].selling_price}
+              size = {data[1].item_size}
+              unit = {data[1].measuring_unit}
+              company = {data[1].company}
+              open={setOpenItem}
+              id={1}
+              setId={setId}
+              c={setCart}
+              addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="hidden xl:block  xl:w-1/5">
+            <Item
+                name = {data[0].item_name}
+                img={data[0].item_image}
+                price = {data[0].selling_price}
+                size = {data[0].item_size}
+                unit = {data[0].measuring_unit}
+                company = {data[0].company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+              />
             </div>
           </div>
         </div>
