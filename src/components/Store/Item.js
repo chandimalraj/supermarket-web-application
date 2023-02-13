@@ -22,7 +22,8 @@ export default function Item(props) {
 
 
   return (
-    <div className="flex flex-col  bg-white align-items shadow-lg rounded-lg box hover:shadow-2xl">
+    <div className="w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 mx-0 p-2">
+    <div className="flex flex-col  bg-white align-items shadow-lg rounded-lg box hover:shadow-2xl ">
       <div className="text-orange-700  font-roboto font-medium pt-2 pl-2">
         10% Off
       </div>
@@ -48,6 +49,7 @@ export default function Item(props) {
       {open==true && <ItemPopup id={itemId}  setOpen={setOpen} img={img} name={name} price={price} size={size} unit={unit} company={company} addCart={addcart}/>}
 
 
+    </div>
     </div>
   );
 }

@@ -184,180 +184,28 @@ export default function () {
             New Deals
           </div>
 
-          <div className="flex justify-center space-x-3">
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item
-                name = {data[0].item_name}
-                img={data[0].item_image}
-                price = {data[0].selling_price}
-                size = {data[0].item_size}
-                unit = {data[0].measuring_unit}
-                company = {data[0].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-              />
-            </div>
-
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[1].item_name}
-              img={data[1].item_image}
-              price = {data[1].selling_price}
-              size = {data[1].item_size}
-              unit = {data[1].measuring_unit}
-              company = {data[1].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[2].item_name}
-              img={data[2].item_image}
-              price = {data[2].selling_price}
-              size = {data[2].item_size}
-              unit = {data[2].measuring_unit}
-              company = {data[2].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              
-              />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-              <Item
-                name = {data[2].item_name}
-                img={data[2].item_image}
-                price = {data[2].selling_price}
-                size = {data[2].item_size}
-                unit = {data[2].measuring_unit}
-                company = {data[2].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-               />
-            </div>
-          </div>
-
-          <div className="flex justify-center space-x-3 pt-3">
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-            <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-
+          <div className="flex  flex-wrap ">
+          
+          {data.map((item)=>
             <Item
-                name = {data[2].item_name}
-                img={data[2].item_image}
-                price = {data[2].selling_price}
-                size = {data[2].item_size}
-                unit = {data[2].measuring_unit}
-                company = {data[2].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-               />
-            </div>
+            name = {item.item_name}
+            img={item.item_image}
+            price = {item.selling_price}
+            size = {item.item_size}
+            unit = {item.measuring_unit}
+            company = {item.company}
+            open={setOpenItem}
+            id={1}
+            setId={setId}
+            c={setCart}
+            addCart={itemAddToCart}
+            setCart={setCart}
+          />
+          
 
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-            <Item 
-              name = {data[1].item_name}
-              img={data[1].item_image}
-              price = {data[1].selling_price}
-              size = {data[1].item_size}
-              unit = {data[1].measuring_unit}
-              company = {data[1].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-            <Item
-                name = {data[0].item_name}
-                img={data[0].item_image}
-                price = {data[0].selling_price}
-                size = {data[0].item_size}
-                unit = {data[0].measuring_unit}
-                company = {data[0].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-              />
-            </div>
+          )}
+          
+           
           </div>
         </div>
       </div>
@@ -376,181 +224,31 @@ export default function () {
             </div>
           </div>
 
-          <div className="flex justify-center space-x-3">
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item
-                name = {data[0].item_name}
-                img={data[0].item_image}
-                price = {data[0].selling_price}
-                size = {data[0].item_size}
-                unit = {data[0].measuring_unit}
-                company = {data[0].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-              />
-            </div>
+          <div className="flex  flex-wrap ">
+          
+          {data.map((item)=>
+            <Item
+            name = {item.item_name}
+            img={item.item_image}
+            price = {item.selling_price}
+            size = {item.item_size}
+            unit = {item.measuring_unit}
+            company = {item.company}
+            open={setOpenItem}
+            id={1}
+            setId={setId}
+            c={setCart}
+            addCart={itemAddToCart}
+            setCart={setCart}
+          />
+          
 
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[1].item_name}
-              img={data[1].item_image}
-              price = {data[1].selling_price}
-              size = {data[1].item_size}
-              unit = {data[1].measuring_unit}
-              company = {data[1].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[2].item_name}
-              img={data[2].item_image}
-              price = {data[2].selling_price}
-              size = {data[2].item_size}
-              unit = {data[2].measuring_unit}
-              company = {data[2].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              
-              />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-              <Item
-                name = {data[2].item_name}
-                img={data[2].item_image}
-                price = {data[2].selling_price}
-                size = {data[2].item_size}
-                unit = {data[2].measuring_unit}
-                company = {data[2].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-               />
-            </div>
+          )}
+          
+           
           </div>
 
-          <div className="flex justify-center space-x-3 pt-3">
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-            <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-
-            <Item
-                name = {data[2].item_name}
-                img={data[2].item_image}
-                price = {data[2].selling_price}
-                size = {data[2].item_size}
-                unit = {data[2].measuring_unit}
-                company = {data[2].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-               />
-            </div>
-
-            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item 
-              name = {data[3].item_name}
-              img={data[3].item_image}
-              price = {data[3].selling_price}
-              size = {data[3].item_size}
-              unit = {data[3].measuring_unit}
-              company = {data[3].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-            <Item 
-              name = {data[1].item_name}
-              img={data[1].item_image}
-              price = {data[1].selling_price}
-              size = {data[1].item_size}
-              unit = {data[1].measuring_unit}
-              company = {data[1].company}
-              open={setOpenItem}
-              id={1}
-              setId={setId}
-              c={setCart}
-              addCart={itemAddToCart}
-              setCart={setCart}
-              />
-            </div>
-
-            <div className="hidden xl:block  xl:w-1/5">
-            <Item
-                name = {data[0].item_name}
-                img={data[0].item_image}
-                price = {data[0].selling_price}
-                size = {data[0].item_size}
-                unit = {data[0].measuring_unit}
-                company = {data[0].company}
-                open={setOpenItem}
-                id={1}
-                setId={setId}
-                c={setCart}
-                addCart={itemAddToCart}
-                setCart={setCart}
-              />
-            </div>
-          </div>
+          
         </div>
       </div>
 
