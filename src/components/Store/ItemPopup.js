@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import close from "../../icons/Cancel.png";
 
 export default function ItemPopup(props) {
 
-  const {name ,company,  img , price , size , unit} = props
+  const {name ,company,  img , price , size , unit ,addCart} = props
 
   const setOpen = props.setOpen;
+
+  const [quantity,setQuantity] = useState(0);
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-center items-center">
@@ -49,13 +51,19 @@ export default function ItemPopup(props) {
 
             <div className=" flex pt-8">
               <div>Quantity </div>
-              <input className="w-10 ml-4" />
+              <input className="w-10 ml-4" onChange={(e)=>{
+                setQuantity(e.target.value)
+              }}
+   />
             </div>
           </div>
         </div>
 
         <div className="flex justify-center items-center p-2">
-          <button className="p-2 bg-green-500 px-4 rounded-lg  text-base font-medium text-white hover:bg-green-600">
+          <button className="p-2 bg-green-500 px-4 rounded-lg  text-base font-medium text-white hover:bg-green-600" onClick={()=>{
+            addCart({name:name , company:company, price:price , quantity:quantity})
+            //console.log(quantity)
+          }}>
             Add to Cart
           </button>
         </div>

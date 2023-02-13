@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import buscuit from "../../images/buscuit.png";
-import b2 from "../../images/b2.jpeg";
-import b3 from "../../images/b3.jpeg";
-import b4 from "../../images/b4.jpeg";
+
 import search from "../../images/Vector.png";
 import login from "../../images/login.png";
 import menu from "../../images/menu.svg";
@@ -32,7 +29,9 @@ export default function () {
   const [itemId, setId] = useState(0);
   const [cartdrop, setCart] = useState(false);
   const [catdrop, setCat] = useState(false);
+
   const [cartList, setItemToCart] = useState([]);
+  const [i,setI] = useState()
 
   //fetch data of items from database
   const fetchData = async ()=>{
@@ -50,7 +49,7 @@ export default function () {
 
   }
 
-  //when page first time rendered this call back function executes
+  //when page first time rendered this callback function executes
   useEffect(()=>{
 
     fetchData()
@@ -65,8 +64,8 @@ export default function () {
 
 
 
-  const itemAddFunction = () => {
-    setItemToCart([...cartList, { id: "1", name: "munchee", price: "120" }]);
+  const itemAddToCart = (obj) => {
+    setItemToCart([...cartList, obj]);
   };
 
  // console.log(data);
@@ -219,7 +218,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
               />
             </div>
 
@@ -235,7 +235,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -251,7 +252,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               
               />
             </div>
@@ -268,7 +270,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -284,7 +287,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
                />
             </div>
           </div>
@@ -302,7 +306,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -319,7 +324,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
                />
             </div>
 
@@ -335,7 +341,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -351,7 +358,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -367,7 +375,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
               />
             </div>
           </div>
@@ -401,7 +410,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
               />
             </div>
 
@@ -417,7 +427,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -433,7 +444,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               
               />
             </div>
@@ -450,7 +462,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -466,7 +479,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
                />
             </div>
           </div>
@@ -484,7 +498,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -501,7 +516,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
                />
             </div>
 
@@ -517,7 +533,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -533,7 +550,8 @@ export default function () {
               id={1}
               setId={setId}
               c={setCart}
-              addCart={itemAddFunction}
+              addCart={itemAddToCart}
+              setCart={setCart}
               />
             </div>
 
@@ -549,7 +567,8 @@ export default function () {
                 id={1}
                 setId={setId}
                 c={setCart}
-                addCart={itemAddFunction}
+                addCart={itemAddToCart}
+                setCart={setCart}
               />
             </div>
           </div>

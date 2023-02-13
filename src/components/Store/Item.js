@@ -4,12 +4,8 @@ import ItemPopup from "./ItemPopup";
 export default function Item(props) {
 
 
-  const {name , company , img , price , size , unit} = props
-
-
-
-
-
+  const {name , company , img , price , size , unit , setCart} = props
+  const addcart = props.addCart;
 
   const itemId = props.id;
   const [details  , setDetails] = useState(
@@ -18,7 +14,7 @@ export default function Item(props) {
   const [open,setOpen] =useState(false)
   const c = props.c
 
-  const addcart = props.addCart;
+  
 
 
 
@@ -39,6 +35,7 @@ export default function Item(props) {
         <div onClick={()=>{
           // props.setId(itemId)
           //props.open(true)
+          //setCart(false)
           setOpen(true)
           //c(false)
           //addcart()
@@ -48,7 +45,7 @@ export default function Item(props) {
         </div>
       </div>
 
-      {open==true && <ItemPopup id={itemId}  setOpen={setOpen} img={img} name={name} price={price} size={size} unit={unit} company={company}/>}
+      {open==true && <ItemPopup id={itemId}  setOpen={setOpen} img={img} name={name} price={price} size={size} unit={unit} company={company} addCart={addcart}/>}
 
 
     </div>

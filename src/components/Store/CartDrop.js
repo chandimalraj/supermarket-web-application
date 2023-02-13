@@ -44,8 +44,8 @@ export default function CartDrop(props) {
 
      }
 
-           {cart.map((user) => (
-        <CartItem/>
+           {cart.map((item) => (
+        <CartItem name={item.name} price ={item.price} quantity={item.quantity}/>
       ))}
       
       
