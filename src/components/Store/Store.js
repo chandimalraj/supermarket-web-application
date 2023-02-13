@@ -70,34 +70,13 @@ export default function () {
 
  // console.log(data);
 
-  const [item, setItem] = useState({
-    id: "",
-    name: "",
-    price: "",
-  });
+  
 
-  const items = [
-    {
-      id: 1,
-      name: "munchee",
-      price: "120",
-    },
-    {
-      id: 2,
-      name: "munchee",
-      price: "120",
-    },
-  ];
+ 
 
-  const itemFind = () => {
-    setItem({
-      id: itemId,
-      name: "ona maggulak",
-    });
-  };
 
-  const { id } = useParams();
-  //console.log(id);
+
+
   if(!render){
     return <Spinner/>
   }
@@ -108,7 +87,7 @@ export default function () {
 
       <div className="bg-slate-800 sticky top-0 z ">
         <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 relative">
-          {cartdrop == true && <CartDrop cart={cartList} items={items} />}
+          {cartdrop == true && <CartDrop cart={cartList}  />}
           <div className="font-display text-lg font-semibold text-slate-100 pr-10">
             StarX Shopping
           </div>
