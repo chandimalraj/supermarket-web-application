@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import buscuit from "../../images/buscuit.png";
 import b2 from "../../images/b2.jpeg";
@@ -19,10 +19,11 @@ import ItemPopup from "./ItemPopup";
 import cart from "../../icons/Buy.png";
 import CartDrop from "./CartDrop";
 import CatogeryDrop from "./CatogeryDrop";
+import axios from "axios";
 
 export default function () {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openItem, setOpenItem] = useState(false);
   const [itemId, setId] = useState(0);
@@ -30,11 +31,34 @@ export default function () {
   const [catdrop, setCat] = useState(false);
   const [cartList, setItemToCart] = useState([]);
 
+  //fetch data of items from database
+  const fetchData = async ()=>{
+
+    try {
+      const res = await axios.get('http://localhost:8050/api/v1/item/get-all')
+      //const data =  await res.json()
+      console.log(res.data[0])                
+      
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  //when page first time rendered this call back function executes
+  useEffect(()=>{
+
+    fetchData()
+
+  },[])
+
+
+  
   const itemAddFunction = () => {
     setItemToCart([...cartList, { id: "1", name: "munchee", price: "120" }]);
   };
 
-  console.log(cartList);
+  //console.log(cartList);
 
   const [item, setItem] = useState({
     id: "",
@@ -63,7 +87,7 @@ export default function () {
   };
 
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
 
   return (
     <div className="">
@@ -77,44 +101,57 @@ export default function () {
           </div>
 
           <ul
-            className={`text-white absolute md:static bg-slate-800 md:z-auto z-[-1] left-0 w-full md:w-auto transition-all-duration-2000 ease-in ${
+            className={`text-white absolute sm:static bg-slate-800 sm:z-auto z-[-1] left-0 w-full md:w-auto transition-all-duration-2000 ease-in ${
               open ? "top-16" : "top-[-400px]"
             }`}
           >
-            <li className="mx-5 md:inline hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
+            <li className="mx-5 sm:inline hover:cursor-pointer font-roboto text-sm  md:text-base font-medium hover:text-orange-100 md:my-0 my-1">
               Home
             </li>
-            <li className="mx-5   md:inline hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
+            <li className="mx-5   sm:inline hover:cursor-pointer font-roboto text-sm  md:text-base font-medium hover:text-orange-100 md:my-0 my-1">
               Products
             </li>
-            <li className="mx-5   md:inline hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
+            <li className="mx-5   sm:inline hover:cursor-pointer font-roboto text-sm  md:text-base font-medium hover:text-orange-100 md:my-0 my-1">
               Exclusives
             </li>
-            <li className="mx-5   md:inline hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
+            <li className="mx-5   sm:inline hover:cursor-pointer font-roboto text-sm  md:text-base font-medium hover:text-orange-100 md:my-0 my-1">
               Promotions
             </li>
+            <li className="mx-5   sm:hidden hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
+            <button
+              className=" md:flex  px-6 p-1 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-3xl "
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login
+            </button>
+            </li>
+
+
           </ul>
 
           <div className="flex space-x-6">
+
             <img
               src={cart}
-              className="w-7 sm:w-9"
+              className="w-7 h-7 md:w-9 md:h-auto pt-1 md:pt-0"
               onClick={() => setCart(!cartdrop)}
             />
 
             <div
-              className=" text-3xl  md:hidden"
+              className=" text-3xl  sm:hidden"
               onClick={() => {
                 setOpen(!open);
               }}
             >
               <span>
-                <ion-icon name={open ? "close" : "menu"}></ion-icon>
+                <ion-icon name={open ? "close" : "menu"} ></ion-icon>
               </span>
             </div>
 
             <button
-              className="hidden md:flex  px-6 p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-3xl "
+              className="hidden sm:flex   md:px-6 p-2 md:p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-xl md:rounded-3xl "
               onClick={() => {
                 navigate("/login");
               }}
@@ -127,7 +164,7 @@ export default function () {
         </div>
       </div>
 
-      <div className="hidden sm:flex container mx-auto flex justify-center -mt-4 h-12 -mb-8 sticky top-16 z">
+      <div className="hidden md:flex container mx-auto flex justify-center -mt-4 h-12 -mb-8 sticky top-16 z">
         <button className=" bg-green-500 hidden md:block    text-base font-medium text-white md:rounded-l-3xl  hover:bg-green-600 flex  items-center shadow-lg relative ">
           <span
             onClick={() => {
@@ -135,7 +172,7 @@ export default function () {
             }}
             className="pr-6 pl-5 p-4"
           >
-            Catogeries ->
+            Catogeries 
           </span>
           {catdrop == true && <CatogeryDrop />}
         </button>
@@ -150,13 +187,42 @@ export default function () {
       </div>
 
       <div className="">
-        <div className="container mx-auto pb-8 px-5">
-          <div className="w-full flex justify-center pt-4 pb-8 text-base font-medium ">
+        <div className="container mx-auto md:pb-8 px-5">
+          <div className="w-full flex justify-center pt-4 pb-2 md:pb-8 text-base font-medium ">
             New Deals
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center sm:space-x-3 space-y-2 sm:space-y-0 ">
-            <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+          <div className="flex justify-center space-x-3">
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item
+                img={'https://i.ibb.co/Xp5PLgz/b4.jpg'}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+              />
+            </div>
+
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item img={b3} />
+            </div>
+
+            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item img={b2} />
+            </div>
+
+            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
+              <Item img={b3} />
+            </div>
+
+            <div className="hidden xl:block  xl:w-1/5">
+              <Item img={b4} />
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-3 pt-3">
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
               <Item
                 img={b4}
                 open={setOpenItem}
@@ -167,27 +233,27 @@ export default function () {
               />
             </div>
 
-            <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
-              <Item img={b2} />
-            </div>
-
-            <div className="w-full sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
               <Item img={b3} />
             </div>
 
+            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item img={b2} />
+            </div>
+
             <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
-              <Item img={b4} />
+              <Item img={b3} />
             </div>
 
             <div className="hidden xl:block  xl:w-1/5">
-              <Item img={b2} />
+              <Item img={b4} />
             </div>
           </div>
         </div>
       </div>
 
       <div className="">
-        <div className="container mx-auto flex flex-col pb-8 px-5 ">
+        <div className="container mx-auto flex flex-col md:pb-8 px-5 ">
           <div className="flex justify-center  align-items px-8 pb-8">
             <div className="w-1/2 pt-10">
               <hr className="h-1 bg-gray-500" />
@@ -203,6 +269,35 @@ export default function () {
           <div className="flex justify-center space-x-3 ">
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
               <Item img={b4} c={setCart} />
+            </div>
+
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item img={b3} />
+            </div>
+
+            <div className="hidden sm:block md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item img={b2} />
+            </div>
+
+            <div className="hidden lg:block  lg:w-1/4 xl:w-1/5">
+              <Item img={b3} />
+            </div>
+
+            <div className="hidden xl:block  xl:w-1/5">
+              <Item img={b4} />
+            </div>
+          </div>
+
+          <div className="flex justify-center space-x-3 pt-3">
+            <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
+              <Item
+                img={b4}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddFunction}
+              />
             </div>
 
             <div className="w-1/2 sm:w-fit md:w-1/3 lg:w-1/4 xl:w-1/5">
@@ -284,26 +379,26 @@ export default function () {
 
       <div className="bg-slate-800 pt-4 ">
         <div className="container mx-auto grid grid-cols-4 gap-4  pb-8 ">
-          <div className="flex flex-col  text-white lg:pl-12">
-            <div className=" pb-4">Quick Links</div>
+          <div className="flex flex-col   lg:pl-12">
+            <div className=" pb-4 text-teal-300 ">Quick Links</div>
 
-            <div className="py-2">Home</div>
-            <div className="py-2">Catalogue & Deals</div>
-            <div className="py-2">Utility bill payments</div>
-            <div className="py-2">Track My Order</div>
+            <div className="py-2 text-white">Home</div>
+            <div className="py-2 text-white">Catalogue & Deals</div>
+            <div className="py-2 text-white">Utility bill payments</div>
+            <div className="py-2 text-white">Track My Order</div>
           </div>
 
-          <div className="flex flex-col  text-white">
-            <div className=" pb-4">Quick Links</div>
+          <div className="flex flex-col  ">
+            <div className=" pb-4 text-teal-300">Quick Links</div>
 
-            <div className="py-2">Home</div>
-            <div className="py-2">Catalogue & Deals</div>
-            <div className="py-2">Utility bill payments</div>
-            <div className="py-2">Track My Order</div>
+            <div className="py-2 text-white">Home</div>
+            <div className="py-2 text-white">Catalogue & Deals</div>
+            <div className="py-2 text-white">Utility bill payments</div>
+            <div className="py-2 text-white">Track My Order</div>
           </div>
 
           <div className="col-span-2 lg:pr-10">
-            <div className="text-white pb-2">Enter Your Email To Subscribe</div>
+            <div className=" pb-2 text-teal-300">Enter Your Email To Subscribe</div>
             <div className="w-full flex pb-3">
               <input className="w-full outline-0 pl-2 " />
               <button className="bg-green-400 p-1.5 text-white font-roboto hover:bg-green-600 ">
