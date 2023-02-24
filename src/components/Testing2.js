@@ -8,18 +8,19 @@ import {
 
 import { useState } from "react";
 
-export default function Testing() {
+export default function Testing2() {
   const [location, setLocation] = useState({});
 
   useEffect(() => {
     if ("geolocation" in navigator) {
       console.log("Available");
-      navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.watchPosition(
         (position) => {
-          console.log(position)
+          console.log(position);
           setLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
+            speed: position.coords.speed,
           });
         },
         (error) => console.error(error)
@@ -66,6 +67,20 @@ export default function Testing() {
     },
   ];
 
+  let index = 0;
+
+//   const changeLocation = setInterval(() => {
+//     setLocation({
+//       latitude: markers[index].position.lat,
+//       longitude: markers[index].position.lng,
+      
+//     });
+//     index++;
+//     // if (index == 5) {
+//     //   index = 0;
+//     // }
+//   }, 1000);
+
   return isLoaded ? (
     <div className="flex flex-col justify-center items-center">
       <div className="">Enter your dilivery location</div>
@@ -78,7 +93,6 @@ export default function Testing() {
           streetViewControl: false,
           mapTypeControl: false,
           fullscreenControl: false,
-          
         }}
       >
         {/* {markers.map(({ id, name, position }) => (
@@ -87,21 +101,25 @@ export default function Testing() {
     position={position}
     >
     </Marker>
+
 ))} */}
 
-<Marker
-        position={{ lat: location.latitude, lng: location.longitude }}
-        draggable={true}
-        onDragEnd={(e) => {
-          setLocation({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-        }}
-      />
-</GoogleMap>
+        <Marker
+          position={{ lat: location.latitude, lng: location.longitude }}
+          draggable={true}
+          // onDragEnd={(e) => {
+          //   setLocation({ latitude: e.latLng.lat(), longitude: e.latLng.lng() });
+          // }}
+        />
+      </GoogleMap>
 
-<button className="" onClick={()=>{
-  console.log(location)
-}}>submit location</button>
+      <div>speed is {location.speed}</div>
+
+      <button className="" >
+        submit location
+      </button>
     </div>
   ) : (
     <></>
-  );}
+  );
+}

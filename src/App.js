@@ -11,6 +11,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login'
 import Store from './components/Store/Store.js';
 import Testing from './components/Testing';
+import Testing2 from './components/Testing2';
 
 function App() {
   
@@ -26,13 +27,11 @@ function App() {
         <Route exact path='/login' element={<Login/>}></Route>
         <Route exact path="/store" element={<Store/>}></Route>
         <Route exact path='/testing' element={<Testing/>}></Route>
+        <Route exact path='/testing2' element={<Testing2/>}></Route>
 
         </Routes>
 
       </Router>
-    
-     
-    
   );
 }
 
