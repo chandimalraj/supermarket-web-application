@@ -13,7 +13,7 @@ export default function ItemPopup(props) {
     <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-center items-center">
       <div
         className="bg-slate-100  flex flex-col rounded-lg"
-        style={{ width: "550px" }}
+        style={{ width: "400px" }}
       >
         {/* Item popup {props.id}
           <button onClick={()=>{

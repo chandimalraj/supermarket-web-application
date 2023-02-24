@@ -20,9 +20,8 @@ import axios from "axios";
 import Spinner from "../Register/Spinner";
 
 export default function () {
-  
-  const [render, setRender] = useState(false)
-  const [data,setData] = useState([])
+  const [render, setRender] = useState(false);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [openItem, setOpenItem] = useState(false);
@@ -31,70 +30,56 @@ export default function () {
   const [catdrop, setCat] = useState(false);
 
   const [cartList, setItemToCart] = useState([]);
-  const [i,setI] = useState()
+  const [i, setI] = useState();
 
   //fetch data of items from database
-  const fetchData = async ()=>{
-
+  const fetchData = async () => {
     try {
-      const res = await axios.get('http://localhost:8050/api/v1/item/get-all')
+      const res = await axios.get("http://localhost:8050/api/v1/item/get-all");
       //const data =  await res.json()
-      console.log(res.data[0])  
-      setData(res.data) 
-      setRender(true)           
-      
+      console.log(res.data[0]);
+      setData(res.data);
+      setRender(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   //when page first time rendered this callback function executes
-  useEffect(()=>{
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-    fetchData()
-
-  },[])
-
-  if(render){
-    console.log(data[0].item_name)
+  if (render) {
+    console.log(data[0].item_name);
   }
 
- // console.log(data[0].item_id)
-
-
+  // console.log(data[0].item_id)
 
   const itemAddToCart = (obj) => {
     setItemToCart([...cartList, obj]);
   };
 
- // console.log(data);
+  // console.log(data);
 
-  
-
- 
-
-
-
-
-  if(!render){
-    return <Spinner/>
+  if (!render) {
+    return <Spinner />;
   }
- 
-  return  (
+
+  return (
     <div className="">
       {/* {openItem == true && <ItemPopup id={item.id} />} */}
 
       <div className="bg-slate-800 sticky top-0 z ">
-        <div className="container mx-auto flex justify-between pt-4 pb-8 p-2 relative">
-          {cartdrop == true && <CartDrop cart={cartList}  />}
-          <div className="font-display text-lg font-semibold text-slate-100 pr-10">
+        <div className="md:container mx-auto flex justify-between pt-4 sm:pb-8 p-2 relative ">
+          {cartdrop == true && <CartDrop cart={cartList} />}
+          <div className="font-display md:text-lg font-semibold text-slate-100 md:pr-10">
             StarX Shopping
           </div>
 
           <ul
-            className={`text-white absolute sm:static bg-slate-800 sm:z-auto z-[-1] left-0 w-full md:w-auto transition-all-duration-2000 ease-in ${
-              open ? "top-16" : "top-[-400px]"
+            className={` text-white absolute sm:static bg-slate-800 sm:z-auto z-[-1] left-0 w-full sm:w-auto transition-all-duration-2000 ease-in ${
+              open ? "top-14" : "top-[-410px]"
             }`}
           >
             <li className="mx-5 sm:inline hover:cursor-pointer font-roboto text-sm  md:text-base font-medium hover:text-orange-100 md:my-0 my-1">
@@ -110,24 +95,21 @@ export default function () {
               Promotions
             </li>
             <li className="mx-5   sm:hidden hover:cursor-pointer font-roboto text-base font-medium hover:text-orange-100 md:my-0 my-1">
-            <button
-              className=" md:flex  px-6 p-1 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-3xl "
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Login
-            </button>
+              <button
+                className=" md:flex mt-2 mb-3 px-4 p-1 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-sm font-medium text-white  mr-3 flex items-center rounded-3xl "
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </button>
             </li>
-
-
           </ul>
 
-          <div className="flex space-x-6">
-
+          <div className="flex space-x-3 md:items-center ">
             <img
               src={cart}
-              className="w-7 h-7 md:w-9 md:h-auto pt-1 md:pt-0"
+              className="w-6 h-7 md:w-6 md:h-6 lg:w-9 lg:h-9 md:h-auto pt-1 md:pt-0"
               onClick={() => setCart(!cartdrop)}
             />
 
@@ -138,12 +120,12 @@ export default function () {
               }}
             >
               <span>
-                <ion-icon name={open ? "close" : "menu"} ></ion-icon>
+                <ion-icon name={open ? "close" : "menu"}></ion-icon>
               </span>
             </div>
 
             <button
-              className="hidden sm:flex   md:px-6 p-2 md:p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer text-base font-medium text-white  mr-3 flex items-center rounded-xl md:rounded-3xl "
+              className="hidden sm:flex   md:px-6 p-2 md:p-2 bg-green-500 hover:bg-green-600 hover:cursor-pointer md:text-base font-medium text-white   flex items-center rounded-xl md:rounded-3xl "
               onClick={() => {
                 navigate("/login");
               }}
@@ -164,7 +146,7 @@ export default function () {
             }}
             className="pr-6 pl-5 p-4"
           >
-            Catogeries 
+            Catogeries
           </span>
           {catdrop == true && <CatogeryDrop />}
         </button>
@@ -185,27 +167,22 @@ export default function () {
           </div>
 
           <div className="flex  flex-wrap ">
-          
-          {data.map((item)=>
-            <Item
-            name = {item.item_name}
-            img={item.item_image}
-            price = {item.selling_price}
-            size = {item.item_size}
-            unit = {item.measuring_unit}
-            company = {item.company}
-            open={setOpenItem}
-            id={1}
-            setId={setId}
-            c={setCart}
-            addCart={itemAddToCart}
-            setCart={setCart}
-          />
-          
-
-          )}
-          
-           
+            {data.map((item) => (
+              <Item
+                name={item.item_name}
+                img={item.item_image}
+                price={item.selling_price}
+                size={item.item_size}
+                unit={item.measuring_unit}
+                company={item.company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddToCart}
+                setCart={setCart}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -225,30 +202,23 @@ export default function () {
           </div>
 
           <div className="flex  flex-wrap ">
-          
-          {data.map((item)=>
-            <Item
-            name = {item.item_name}
-            img={item.item_image}
-            price = {item.selling_price}
-            size = {item.item_size}
-            unit = {item.measuring_unit}
-            company = {item.company}
-            open={setOpenItem}
-            id={1}
-            setId={setId}
-            c={setCart}
-            addCart={itemAddToCart}
-            setCart={setCart}
-          />
-          
-
-          )}
-          
-           
+            {data.map((item) => (
+              <Item
+                name={item.item_name}
+                img={item.item_image}
+                price={item.selling_price}
+                size={item.item_size}
+                unit={item.measuring_unit}
+                company={item.company}
+                open={setOpenItem}
+                id={1}
+                setId={setId}
+                c={setCart}
+                addCart={itemAddToCart}
+                setCart={setCart}
+              />
+            ))}
           </div>
-
-          
         </div>
       </div>
 
@@ -331,7 +301,9 @@ export default function () {
           </div>
 
           <div className="col-span-2 lg:pr-10">
-            <div className=" pb-2 text-teal-300">Enter Your Email To Subscribe</div>
+            <div className=" pb-2 text-teal-300">
+              Enter Your Email To Subscribe
+            </div>
             <div className="w-full flex pb-3">
               <input className="w-full outline-0 pl-2 " />
               <button className="bg-green-400 p-1.5 text-white font-roboto hover:bg-green-600 ">
