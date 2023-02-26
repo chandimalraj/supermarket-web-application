@@ -6,14 +6,26 @@ export default function ItemPopup(props) {
   const {name ,company,  img , price , size , unit ,addCart} = props
 
   const setOpen = props.setOpen;
+  const [quantity,setQuantity] = useState(1);
 
-  const [quantity,setQuantity] = useState(0);
+  const regex = /^(?:[1-9]|[1-9][0-9]|[1-4][0-9]{2}|500)$/;
+  
+  const validate = (num)=>{
+    if(regex.test(num)){
+      setQuantity(num)
+    }
+    else{
+      
+    }
+  }
+
+  
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-center items-center">
       <div
-        className="bg-slate-100  flex flex-col rounded-lg"
-        style={{ width: "400px" }}
+        className="bg-slate-100  flex flex-col rounded-lg popup"
+        
       >
         {/* Item popup {props.id}
           <button onClick={()=>{
@@ -43,7 +55,7 @@ export default function ItemPopup(props) {
             <img src={img} className=" w-56 rounded-lg" />
           </div>
 
-          <div className="flex flex-col p-4 pr-0  space-y-2  w-72 font-roboto font-base">
+          <div className="flex flex-col p-4 pr-0  space-y-2  w-72 font-roboto font-base ">
             <div>{name}</div>
             <div className="text-green-800">{price}/=</div>
             <div>{company}</div>
@@ -51,9 +63,12 @@ export default function ItemPopup(props) {
 
             <div className=" flex pt-8">
               <div>Quantity </div>
-              <input className="w-10 ml-4" onChange={(e)=>{
-                setQuantity(e.target.value)
+              <input className="w-10 ml-4 px-2 outline-0 focus:outline-1 focus:outline-green-300 focus:placeholder:hidden"  onChange={(e)=>{
+                
+                validate(e.target.value)
+
               }}
+              placeholder="1"
    />
             </div>
           </div>

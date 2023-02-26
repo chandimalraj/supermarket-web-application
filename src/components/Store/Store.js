@@ -19,6 +19,8 @@ import CatogeryDrop from "./CatogeryDrop";
 import axios from "axios";
 import Spinner from "../Register/Spinner";
 
+
+
 export default function () {
   const [render, setRender] = useState(false);
   const [data, setData] = useState([]);
@@ -60,6 +62,19 @@ export default function () {
     setItemToCart([...cartList, obj]);
   };
 
+  let x =0
+  const removeItemFromCart = (name)=>{
+    const items = cart;
+    // items.map(item => {
+      
+    //   if(item.name == name){
+           
+    //      console.log(item)
+    //   }
+    // x++;
+    // });
+  }
+
   // console.log(data);
 
   if (!render) {
@@ -70,15 +85,17 @@ export default function () {
     <div className="">
       {/* {openItem == true && <ItemPopup id={item.id} />} */}
 
-      <div className="bg-slate-800 sticky top-0 z ">
+      <div className="bg-slate-800 sticky top-0 z">
         <div className="md:container mx-auto flex justify-between pt-4 sm:pb-8 p-2 relative ">
-          {cartdrop == true && <CartDrop cart={cartList} />}
+
+          {cartdrop == true && <CartDrop cart={cartList} removeItemFromCart={removeItemFromCart}/>}
+
           <div className="font-display md:text-lg font-semibold text-slate-100 md:pr-10">
             StarX Shopping
           </div>
 
           <ul
-            className={` text-white absolute sm:static bg-slate-800 sm:z-auto z-[-1] left-0 w-full sm:w-auto transition-all-duration-2000 ease-in ${
+            className={` text-white absolute sm:static bg-slate-800 sm:z-auto  z-[-1] left-0 w-full sm:w-auto transition-all-duration-2000 ease-in ${
               open ? "top-14" : "top-[-410px]"
             }`}
           >
@@ -161,7 +178,7 @@ export default function () {
       </div>
 
       <div className="">
-        <div className="container mx-auto md:pb-8 px-5">
+        <div className="sm:container mx-auto md:pb-8 md:px-5">
           <div className="w-full flex justify-center pt-4 pb-2 md:pb-8 text-base font-medium ">
             New Deals
           </div>
@@ -188,7 +205,7 @@ export default function () {
       </div>
 
       <div className="">
-        <div className="container mx-auto flex flex-col md:pb-8 px-5 ">
+        <div className="sm:container mx-auto flex flex-col md:pb-8 md:px-5 ">
           <div className="flex justify-center  align-items px-8 pb-8">
             <div className="w-1/2 pt-10">
               <hr className="h-1 bg-gray-500" />
@@ -223,7 +240,7 @@ export default function () {
       </div>
 
       <div className="pt-4">
-        <div className="container mx-auto  pb-8 px-5">
+        <div className="sm:container mx-auto  pb-8 md:px-5">
           <div className="flex justify-center align-items px-8 ">
             <div className="w-1/2 pt-8 h-1">
               <hr className="h-1 bg-gray-500" />
@@ -246,7 +263,7 @@ export default function () {
       </div>
 
       <div className="">
-        <div className="container mx-auto  pb-8 ">
+        <div className="sm:container mx-auto  pb-8 ">
           <div className="flex px-8 space-x-2 ">
             <div className="hidden lg:block lg:w-1/3 bg-orange-100 ">
               <img src={c1} />

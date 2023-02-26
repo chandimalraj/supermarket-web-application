@@ -3,7 +3,7 @@ import close from '../../icons/redClose.png'
 
 export default function CartItem(props) {
 
-   const {name,price,quantity} = props
+   const {name,price,quantity,removeItemFromCart} = props
 
   return (
     <div className='bg-white w-90 h-10 flex items-center rounded'>
@@ -18,7 +18,7 @@ export default function CartItem(props) {
            
            <input className='border w-10 bg-slate-100 ml-2' value={quantity}/>
            <img src={close} className="w-6 ml-3"
-
+             onClick={removeItemFromCart(name)}
            />
            
         </div>
