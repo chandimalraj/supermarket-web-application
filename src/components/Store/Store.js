@@ -18,8 +18,7 @@ import CartDrop from "./CartDrop";
 import CatogeryDrop from "./CatogeryDrop";
 import axios from "axios";
 import Spinner from "../Register/Spinner";
-
-
+import { queryAllByAltText } from "@testing-library/react";
 
 export default function () {
   const [render, setRender] = useState(false);
@@ -32,6 +31,7 @@ export default function () {
   const [catdrop, setCat] = useState(false);
 
   const [cartList, setItemToCart] = useState([]);
+  const [amount,setAmount] = useState(0)
   const [i, setI] = useState();
 
   //fetch data of items from database
@@ -39,7 +39,7 @@ export default function () {
     try {
       const res = await axios.get("http://localhost:8050/api/v1/item/get-all");
       //const data =  await res.json()
-      console.log(res.data[0]);
+      //console.log(res.data[0]);
       setData(res.data);
       setRender(true);
     } catch (error) {
@@ -52,30 +52,54 @@ export default function () {
     fetchData();
   }, []);
 
-  if (render) {
-    console.log(data[0].item_name);
-  }
-
   // console.log(data[0].item_id)
 
+
   const itemAddToCart = (obj) => {
-    setItemToCart([...cartList, obj]);
+
+
+    if (cartList.length < 1) {
+      setItemToCart([...cartList, obj]);
+      console.log("1");
+    } else {
+      console.log("2");
+      const size = cartList.length;
+      let x=0;
+      for (let index = 0; index < size; index++) {
+        const element = cartList[index];
+        if (element.name == obj.name) {
+          console.log("3");
+          x=1;
+          const upitems = cartList.map((item) => {
+            if (item.name == obj.name) {
+              return { ...item, quantity: item.quantity + obj.quantity };
+            }
+            return item;
+          });
+
+          setItemToCart(upitems);
+        } 
+
+      }
+      if(x==0){
+        setItemToCart([...cartList, obj])
+      }
+    }
+
+    
   };
 
-  let x =0
-  const removeItemFromCart = (name)=>{
-    const items = cart;
-    // items.map(item => {
-      
-    //   if(item.name == name){
-           
-    //      console.log(item)
-    //   }
-    // x++;
-    // });
-  }
 
-  // console.log(data);
+  const removeItemFromCart = (name) => {
+   const updatedItems = cartList.filter(item=>item.name !== name)
+   setItemToCart(updatedItems)
+  };
+
+  
+
+  
+
+ 
 
   if (!render) {
     return <Spinner />;
@@ -87,8 +111,9 @@ export default function () {
 
       <div className="bg-slate-800 sticky top-0 z">
         <div className="md:container mx-auto flex justify-between pt-4 sm:pb-8 p-2 relative ">
-
-          {cartdrop == true && <CartDrop cart={cartList} removeItemFromCart={removeItemFromCart}/>}
+          {cartdrop == true && (
+            <CartDrop cart={cartList} removeItemFromCart={removeItemFromCart} />
+          )}
 
           <div className="font-display md:text-lg font-semibold text-slate-100 md:pr-10">
             StarX Shopping

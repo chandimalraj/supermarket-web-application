@@ -64,8 +64,9 @@ export default function ItemPopup(props) {
             <div className=" flex pt-8">
               <div>Quantity </div>
               <input className="w-10 ml-4 px-2 outline-0 focus:outline-1 focus:outline-green-300 focus:placeholder:hidden"  onChange={(e)=>{
-                
-                validate(e.target.value)
+                const value = e.target.value
+                validate(parseInt(value))
+                // console.log()
 
               }}
               placeholder="1"
@@ -76,7 +77,8 @@ export default function ItemPopup(props) {
 
         <div className="flex justify-center items-center p-2">
           <button className="p-2 bg-green-500 px-4 rounded-lg  text-base font-medium text-white hover:bg-green-600" onClick={()=>{
-            addCart({name:name , company:company, price:price , quantity:quantity})
+            const obj = {name:name , company:company, price:price , quantity:quantity}
+            addCart(obj)
             //console.log(quantity)
           }}>
             Add to Cart
