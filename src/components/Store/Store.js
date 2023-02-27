@@ -94,7 +94,16 @@ export default function () {
    const updatedItems = cartList.filter(item=>item.name !== name)
    setItemToCart(updatedItems)
   };
-
+  
+  const editQuantity =(name,quantity)=>{
+    const upitems = cartList.map((item) => {
+      if (item.name == name) {
+        return { ...item, quantity: quantity };
+      }
+      return item;
+    });
+    setItemToCart(upitems)
+  }
   
 
   
@@ -112,7 +121,7 @@ export default function () {
       <div className="bg-slate-800 sticky top-0 z">
         <div className="md:container mx-auto flex justify-between pt-4 sm:pb-8 p-2 relative ">
           {cartdrop == true && (
-            <CartDrop cart={cartList} removeItemFromCart={removeItemFromCart} />
+            <CartDrop cart={cartList} removeItemFromCart={removeItemFromCart} editQuantity={editQuantity}/>
           )}
 
           <div className="font-display md:text-lg font-semibold text-slate-100 md:pr-10">

@@ -5,6 +5,7 @@ import CartItem from "./CartItem";
 export default function CartDrop(props) {
   const cart = props.cart;
   const removeItemFromCart = props.removeItemFromCart;
+  const editQuantity = props.editQuantity
   
   const [amount, setAmount] = useState(0);
 
@@ -28,6 +29,7 @@ export default function CartDrop(props) {
           price={item.price}
           quantity={item.quantity}
           removeItemFromCart={removeItemFromCart}
+          editQuantity = {editQuantity}
         />
       ))}
 
